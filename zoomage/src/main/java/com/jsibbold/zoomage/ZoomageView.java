@@ -1,12 +1,12 @@
 /**
  * Copyright 2016 Jeffrey Sibbold
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,6 +27,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
@@ -74,7 +75,8 @@ public class ZoomageView extends AppCompatImageView implements OnScaleGestureLis
     private boolean animateOnReset;
     private boolean autoCenter;
     private float doubleTapToZoomScaleFactor;
-    @AutoResetMode private int autoResetMode;
+    @AutoResetMode
+    private int autoResetMode;
 
     private PointF last = new PointF(0, 0);
     private float startScale = 1f;
@@ -243,6 +245,26 @@ public class ZoomageView extends AppCompatImageView implements OnScaleGestureLis
      */
     public void setAnimateOnReset(final boolean animateOnReset) {
         this.animateOnReset = animateOnReset;
+    }
+
+    public void scale(float scale) {
+        if (getScaleType() != ScaleType.MATRIX) {
+            super.setScaleType(ScaleType.MATRIX);
+        }
+
+        if (startValues == null) {
+            setStartValues();
+        }
+
+        //get the current state of the image matrix, its values, and the bounds of the drawn bitmap
+        matrix.set(getImageMatrix());
+        matrix.getValues(matrixValues);
+        updateBounds(matrixValues);
+
+
+        Matrix zoomMatrix = new Matrix(matrix);
+        zoomMatrix.postScale(scale, scale, getWidth() / 2, getHeight() / 2);
+        animateScaleAndTranslationToMatrix(zoomMatrix, RESET_DURATION);
     }
 
     /**
@@ -442,6 +464,7 @@ public class ZoomageView extends AppCompatImageView implements OnScaleGestureLis
         startMatrix.getValues(startValues);
         calculatedMinScale = minScale * startValues[Matrix.MSCALE_X];
         calculatedMaxScale = maxScale * startValues[Matrix.MSCALE_X];
+        Log.d("Calculated", calculatedMinScale + " " + calculatedMaxScale);
     }
 
     @Override
@@ -498,6 +521,7 @@ public class ZoomageView extends AppCompatImageView implements OnScaleGestureLis
 
                     if (zoomable) {
                         matrix.postScale(scaleBy, scaleBy, focusx, focusy);
+                        Log.e("Scale", scaleBy + "");
                         currentScaleFactor = matrixValues[Matrix.MSCALE_X] / startValues[Matrix.MSCALE_X];
                     }
 
@@ -598,7 +622,8 @@ public class ZoomageView extends AppCompatImageView implements OnScaleGestureLis
      *
      * @param targetMatrix the target matrix to animate values to
      */
-    private void animateScaleAndTranslationToMatrix(final Matrix targetMatrix, final int duration) {
+    private void animateScaleAndTranslationToMatrix(final Matrix targetMatrix,
+                                                    final int duration) {
 
         final float[] targetValues = new float[9];
         targetMatrix.getValues(targetValues);

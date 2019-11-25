@@ -29,7 +29,7 @@
         android:id="@+id/demoView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/zoom_demo"
+        android:src="@drawable/zoom_demo_2"
         app:zoomage_restrictBounds="false"
         app:zoomage_animateOnReset="true"
         app:zoomage_autoResetMode="UNDER"
@@ -39,6 +39,23 @@
         app:zoomage_minScale="0.6"
         app:zoomage_maxScale="8"
         />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/photo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:alpha="0.5"
+        android:scaleType="centerInside"
+        android:src="@drawable/zoom_demo">
+
+    </ImageView>
     <include
         android:id="@+id/optionsView"
         android:visibility="gone"

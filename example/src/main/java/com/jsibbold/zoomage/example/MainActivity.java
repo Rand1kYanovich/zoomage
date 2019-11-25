@@ -1,12 +1,12 @@
 /**
  * Copyright 2016 Jeffrey Sibbold
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,18 +18,24 @@ package com.jsibbold.zoomage.example;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 
+import com.jsibbold.zoomage.AutoResetMode;
 import com.jsibbold.zoomage.ZoomageView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     private ZoomageView demoView;
+    private ImageView photo;
     private View optionsView;
     private AlertDialog optionsDialog;
 
@@ -37,7 +43,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        demoView = (ZoomageView)findViewById(R.id.demoView);
+        demoView = (ZoomageView) findViewById(R.id.demoView);
+        photo = (ImageView) findViewById(R.id.photo);
+        Button button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                demoView.scale(3f);
+            }
+        });
         prepareOptions();
     }
 
@@ -103,8 +117,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(final View v) {
         if (v.getId() == R.id.reset) {
             demoView.reset();
-        }
-        else {
+        } else {
             showResetOptions();
         }
     }
