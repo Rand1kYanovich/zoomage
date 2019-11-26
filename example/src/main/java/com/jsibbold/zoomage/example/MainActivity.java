@@ -17,17 +17,22 @@ package com.jsibbold.zoomage.example;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Point;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
+import android.util.Log;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.jsibbold.zoomage.AutoResetMode;
 import com.jsibbold.zoomage.ZoomageView;
@@ -38,18 +43,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView photo;
     private View optionsView;
     private AlertDialog optionsDialog;
+    private RelativeLayout container;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         demoView = (ZoomageView) findViewById(R.id.demoView);
-        photo = (ImageView) findViewById(R.id.photo);
         Button button = (Button) findViewById(R.id.button);
+        container = (RelativeLayout) findViewById(R.id.container);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                demoView.scale(3f);
+                demoView.scale(3f, container.getMeasuredWidth(),container.getMeasuredHeight());
             }
         });
         prepareOptions();

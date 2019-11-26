@@ -246,7 +246,7 @@ public class ZoomageView extends AppCompatImageView implements OnScaleGestureLis
         this.animateOnReset = animateOnReset;
     }
 
-    public void scale(float scale) {
+    public void scale(float scale, int width, int height) {
         if (getScaleType() != ScaleType.MATRIX) {
             super.setScaleType(ScaleType.MATRIX);
         }
@@ -261,7 +261,7 @@ public class ZoomageView extends AppCompatImageView implements OnScaleGestureLis
         updateBounds(matrixValues);
 
         Matrix zoomMatrix = new Matrix(matrix);
-        zoomMatrix.postScale(scale, scale);
+        zoomMatrix.postScale(scale, scale, width / 2, height / 2);
         animateScaleAndTranslationToMatrix(zoomMatrix, RESET_DURATION);
     }
 

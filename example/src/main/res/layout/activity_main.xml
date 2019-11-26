@@ -22,6 +22,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/container"
     android:padding="2dp"
     tools:context="com.jsibbold.zoomage.example.MainActivity">
 
@@ -45,17 +46,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <ImageView
-        android:id="@+id/photo"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:alpha="0.5"
-        android:scaleType="centerInside"
-        android:src="@drawable/zoom_demo">
-
-    </ImageView>
     <include
         android:id="@+id/optionsView"
         android:visibility="gone"
