@@ -111,7 +111,6 @@ public class ZoomageView extends AppCompatImageView implements OnScaleGestureLis
         gestureDetector = new GestureDetector(context, gestureListener);
         ScaleGestureDetectorCompat.setQuickScaleEnabled(scaleDetector, false);
         startScaleType = getScaleType();
-
         TypedArray values = context.obtainStyledAttributes(attrs, R.styleable.ZoomageView);
 
         zoomable = values.getBoolean(R.styleable.ZoomageView_zoomage_zoomable, true);
@@ -261,9 +260,8 @@ public class ZoomageView extends AppCompatImageView implements OnScaleGestureLis
         matrix.getValues(matrixValues);
         updateBounds(matrixValues);
 
-
         Matrix zoomMatrix = new Matrix(matrix);
-        zoomMatrix.postScale(scale, scale, getWidth() / 2, getHeight() / 2);
+        zoomMatrix.postScale(scale, scale);
         animateScaleAndTranslationToMatrix(zoomMatrix, RESET_DURATION);
     }
 
