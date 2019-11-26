@@ -9,8 +9,8 @@ publishing {
             artifactId = mavenArtifactId
 
             artifact("$buildDir/outputs/aar/$artifactFileName")
-            artifact androidJavadocJar
-            artifact androidSourcesJar
+            /*artifact androidJavadocJar
+            artifact androidSourcesJar*/
 
             pom {
                 name = libraryName
