@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                demoView.scale(3f, container.getMeasuredWidth(),container.getMeasuredHeight());
+                demoView.scale(3f);
             }
         });
         prepareOptions();
