@@ -27,4 +27,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     implementation "androidx.appcompat:appcompat:$rootProject.ext.supportVersion"
     implementation project(':zoomage')
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 }
