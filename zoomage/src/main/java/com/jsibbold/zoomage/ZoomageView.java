@@ -260,6 +260,8 @@ public class ZoomageView extends AppCompatImageView implements OnScaleGestureLis
         matrix.getValues(matrixValues);
         updateBounds(matrixValues);
 
+        currentScaleFactor = scale;
+
         Matrix zoomMatrix = new Matrix(matrix);
         zoomMatrix.postScale(scale, scale, getWidth() / 2, getHeight() / 2);
         animateScaleAndTranslationToMatrix(zoomMatrix, RESET_DURATION);
@@ -461,7 +463,7 @@ public class ZoomageView extends AppCompatImageView implements OnScaleGestureLis
         startMatrix = new Matrix(getImageMatrix());
         startMatrix.getValues(startValues);
         calculatedMinScale = minScale * startValues[Matrix.MSCALE_X];
-        calculatedMaxScale = maxScale * startValues[Matrix.MSCALE_X];
+        calculatedMaxScale = maxScale * startValues[    Matrix.MSCALE_X];
         Log.d("Calculated", calculatedMinScale + " " + calculatedMaxScale);
     }
 
