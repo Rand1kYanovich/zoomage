@@ -465,6 +465,11 @@ public class ZoomageView extends AppCompatImageView implements OnScaleGestureLis
         Log.d("Calculated", calculatedMinScale + " " + calculatedMaxScale);
     }
 
+    public void setResetValues(float scale){
+        calculatedMinScale = scale;
+        calculatedMaxScale += scale;
+    }
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
