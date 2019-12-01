@@ -53,7 +53,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         demoView = (ZoomageView) findViewById(R.id.demoView);
         Button button = (Button) findViewById(R.id.button);
+        Button reset = (Button) findViewById(R.id.resetButton);
         container = (RelativeLayout) findViewById(R.id.container);
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                demoView.resetMatrix();
+            }
+        });
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

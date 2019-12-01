@@ -49,7 +49,6 @@ public class ZoomageView extends AppCompatImageView implements OnScaleGestureLis
     private static final float MIN_SCALE = 0.6f;
     private static final float MAX_SCALE = 8f;
     private final int RESET_DURATION = 200;
-
     private ScaleType startScaleType;
 
     // These matrices will be used to move and zoom image
@@ -257,14 +256,19 @@ public class ZoomageView extends AppCompatImageView implements OnScaleGestureLis
 
         //get the current state of the image matrix, its values, and the bounds of the drawn bitmap
         matrix.set(getImageMatrix());
-        matrix.getValues(matrixValues);
-        updateBounds(matrixValues);
+        matrix.getValues(startValues);
+        updateBounds(startValues);
 
         currentScaleFactor = scale;
 
         Matrix zoomMatrix = new Matrix(matrix);
         zoomMatrix.postScale(scale, scale, getWidth() / 2, getHeight() / 2);
         animateScaleAndTranslationToMatrix(zoomMatrix, RESET_DURATION);
+
+    }
+
+    public void resetMatrix(){
+        reset();
     }
 
     /**
@@ -463,11 +467,11 @@ public class ZoomageView extends AppCompatImageView implements OnScaleGestureLis
         startMatrix = new Matrix(getImageMatrix());
         startMatrix.getValues(startValues);
         calculatedMinScale = minScale * startValues[Matrix.MSCALE_X];
-        calculatedMaxScale = maxScale * startValues[    Matrix.MSCALE_X];
+        calculatedMaxScale = maxScale * startValues[Matrix.MSCALE_X];
         Log.d("Calculated", calculatedMinScale + " " + calculatedMaxScale);
     }
 
-    public void setResetValues(float scale){
+    public void setResetValues(float scale) {
         calculatedMinScale = scale;
         calculatedMaxScale += scale;
     }
