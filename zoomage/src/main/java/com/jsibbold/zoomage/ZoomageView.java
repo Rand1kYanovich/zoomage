@@ -268,6 +268,7 @@ public class ZoomageView extends AppCompatImageView implements OnScaleGestureLis
     }
 
     public void resetMatrix(){
+        currentScaleFactor = 1f;
         reset();
     }
 
