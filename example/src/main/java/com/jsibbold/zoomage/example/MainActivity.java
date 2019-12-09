@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                demoView.setImageResource(R.drawable.zoom_demo);
                 demoView.scale(3f);
             }
         });

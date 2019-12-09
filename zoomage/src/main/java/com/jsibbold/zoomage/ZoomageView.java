@@ -364,7 +364,7 @@ public class ZoomageView extends AppCompatImageView implements OnScaleGestureLis
         if (scaleType != null) {
             super.setScaleType(scaleType);
             startScaleType = scaleType;
-            startValues = null;
+            //startValues = null;
         }
     }
 
