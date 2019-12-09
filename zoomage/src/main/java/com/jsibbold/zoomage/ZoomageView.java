@@ -255,13 +255,10 @@ public class ZoomageView extends AppCompatImageView implements OnScaleGestureLis
         }
 
         //get the current state of the image matrix, its values, and the bounds of the drawn bitmap
-        matrix.set(getImageMatrix());
-        matrix.getValues(startValues);
         updateBounds(startValues);
 
-        currentScaleFactor = scale;
-
-        Matrix zoomMatrix = new Matrix(matrix);
+        Matrix zoomMatrix = new Matrix();
+        zoomMatrix.setValues(startValues);
         zoomMatrix.postScale(scale, scale, getWidth() / 2, getHeight() / 2);
         animateScaleAndTranslationToMatrix(zoomMatrix, RESET_DURATION);
 
